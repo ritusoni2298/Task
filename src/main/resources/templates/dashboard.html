@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>All USERS</title>
+</head>
+
+<body>
+<h1> Hello! welcome </h1>
+<!--<h2> CRUD APP</h2>-->
+
+<!--<a href ="/edit"><i>ADD EMPLOYEES</i></a>-->
+<table>
+    <tr>
+        <th>
+            First Name
+        </th>
+
+        <th>
+            Last Name
+        </th>
+
+        <th>
+            Email Name
+        </th>
+    </tr>
+
+    <tbody>
+    <tr th:each = "emp : ${users}">
+        <td th:text = "${emp.firstName}"> </td>
+        <td th:text = "${emp.lastName}"> </td>
+        <td th:text = "${emp.emailId}"> </td>
+<!--        <td>-->
+<!--            <a th:href="@{/edit/{id}(id=${emp.id})}"> EDIT </a>-->
+<!--        </td>-->
+
+        <td sec:authorize="hasRole('ROLE_ADMIN')">
+            This content is only shown to administrators.
+            <a th:href="@{/delete/{id}(id=${emp.id})}"> DELETE</a>
+        </td>
+
+<!--        <td th:authorize="hasRole('ROLE_ADMIN')">-->
+<!--
+      </td>-->
+    </tr>
+    </tbody>
+
+    <div sec:authorize="hasRole('ADMIN')">Text visible to user.</div>
+</table>
+</body>
+</html>
